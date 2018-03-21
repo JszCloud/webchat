@@ -25,7 +25,7 @@ public class Resource {
 
     private String methodPath;// 资源所对应的包路径
 
-    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private List<Role> roles;
 
     public Resource() {

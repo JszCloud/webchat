@@ -39,13 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(new String[]{"/js/**","/css/**","/img/**","/images/**","/fonts/**","/**/favicon.ico"}).permitAll()//不拦截静态资源
+                .antMatchers(new String[]{"/js/**","/css/**","/img/**","/images/**","/fonts/**","/**/favicon.ico","/webjars/**","/to_register","/do_register"}).permitAll()//不拦截静态资源
                 .anyRequest().authenticated()//所有的请求需要认证即登陆后才能访问
                 .and()
                     .formLogin()
                         .loginPage("/login")
                         .failureUrl("/login?error")
-                .defaultSuccessUrl("/index", true)//登录成功后跳转地址
+                .defaultSuccessUrl("/chat", true)//登录成功后跳转地址
                 .permitAll()
                 .and()
                     .logout().permitAll()

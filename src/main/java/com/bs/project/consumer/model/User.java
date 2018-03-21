@@ -39,7 +39,7 @@ public class User implements UserDetails {
     private Date joinTime;
 
     //角色
-    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private List<Role> roles;
 
     /**

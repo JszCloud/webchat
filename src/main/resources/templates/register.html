@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{css/signin.css}"/>
     <style type="text/css">
         body {
-            padding-top: 50px;
+            padding-top: 20px;
         }
 
         .starter-template {
@@ -17,24 +17,11 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Spring Security演示</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/}">首页</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:insert="~{header :: nav}"></div>
 <div class="container">
     <div class="starter-template">
-        <p th:if="${param.logout}" class="bg-warning">已注销</p>
-        <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
-        <h2>使用账号密码登录</h2>
-        <form class="form-signin" role="form" name="form"  action="/register" method="post">
+        <h2>用户注册</h2>
+        <form class="form-signin" role="form" name="form"  action="/register" method="post" th:action="@{/do_register}">
             <div class="form-group">
                 <label for="nickname">昵称</label>
                 <input type="text" class="form-control" name="nickname" value="" placeholder="账号"/>
