@@ -1,12 +1,7 @@
 package com.bs.project.consumer.service;
 
-import com.bs.project.consumer.dao.UserRepository;
-import com.bs.project.consumer.model.Role;
-import com.bs.project.consumer.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.bs.project.consumer.model.SysRole;
+import com.bs.project.consumer.model.SysUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,37 +17,37 @@ public interface UserService {
      * @param name
      * @return
      */
-    User findAll(String name);
+    SysUser findAll(String name);
 
     /**
      * 添加用户
-     * @param user
+     * @param sysUser
      * @return
      */
-    Integer save(User user);
+    Integer save(SysUser sysUser);
 
     /**
      * 删除用户
-     * @param user
+     * @param sysUser
      * @return
      */
-    Integer delete(User user);
+    Integer delete(SysUser sysUser);
 
     /**
      * 修改用户信息
-     * @param user
+     * @param sysUser
      * @return
      */
-    Integer edit(User user);
+    Integer edit(SysUser sysUser);
 
     /**
      * 修改权限
-     * @param user
-     * @param role
+     * @param sysUser
+     * @param sysRole
      * @return
      */
-    Integer editRole(User user, Role role);
+    Integer editRole(SysUser sysUser, SysRole sysRole);
 
-    List<User> find();
+    List<SysUser> find();
 
 }

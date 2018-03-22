@@ -26,7 +26,7 @@
         <p th:if="${param.logout}" class="bg-warning">用户已注销</p>
         <p th:if="${param.error}" class="bg-danger">账号或密码输入错误！</p>
         <h2>使用账号密码登录</h2>
-        <form class="form-signin" role="form" name="form" th:action="@{/login}" action="/login" method="post">
+        <form class="form-signin" sysRole="form" name="form" th:action="@{/login}" action="/login" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" name="username" value="" placeholder="账号"/>
             </div>

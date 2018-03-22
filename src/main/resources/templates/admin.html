@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title sec:authentication="name"></title>
+    <!--<link rel="stylesheet" th:href="@{css/bootstrap.css}"/>-->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 20px;
+        }
+
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header :: nav}"></div>
+<div class="container">
+    <div class="starter-template">
+        <!--<h1 th:text="${msg}"></h1>-->
+        <!--<p class="bg-primary" th:text="${msg.content}"></p>-->
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <p class="bg-info">管理员登录</p>
+        </div>
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <p class="bg-info">普通用户登录</p>
+        </div>
+        <div>
+            <!--<img th:src="${sysUser.avatar}" style="width: 80px;height: 80px;"/>-->
+            <form enctype="multipart/form-data" method="post" action="/uploadfile" th:method="post" th:action="@{/uploadfile}">
+                图片<input type="file" name="file"/>
+                <input type="submit" value="上传"/>
+            </form>
+        </div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-primary" value="注销"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

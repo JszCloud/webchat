@@ -1,8 +1,8 @@
 package com.bs.project.consumer.service.impl;
 
 import com.bs.project.consumer.dao.UserRepository;
-import com.bs.project.consumer.model.Role;
-import com.bs.project.consumer.model.User;
+import com.bs.project.consumer.model.SysRole;
+import com.bs.project.consumer.model.SysUser;
 import com.bs.project.consumer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,66 +32,66 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User findAll(String name) {
+    public SysUser findAll(String name) {
         return userRepository.findByUsername(name);
     }
 
     /**
      * 添加用户
      *
-     * @param user
+     * @param sysUser
      * @return
      */
     @Override
-    public Integer save(User user) {
+    public Integer save(SysUser sysUser) {
         //加密输入的密码
-        String encodePwd=encoder.encode(user.getPassword());
+        String encodePwd=encoder.encode(sysUser.getPassword());
         System.out.println("加密后"+encodePwd);
-        user.setPassword(encodePwd);
+        sysUser.setPassword(encodePwd);
         //定义头像目录
-        user.setAvatar("/images/avatar/avatar" + new Random().nextInt(10) + ".jpg");
+        sysUser.setAvatar("/images/avatar/avatar" + new Random().nextInt(10) + ".jpg");
         //注册时间
-        user.setJoinTime(new Date());
-        List<Role> roles=new ArrayList<>();
+        sysUser.setJoinTime(new Date());
+        List<SysRole> sysRoles =new ArrayList<>();
 
-        roles.add(new Role("ROLE_USER"));
-        user.setRoles(roles);
-        User user1=userRepository.save(user);
-        System.out.println(user1);
+        sysRoles.add(new SysRole(2L));
+        sysUser.setSysRoles(sysRoles);
+        SysUser sysUser1 =userRepository.save(sysUser);
+        System.out.println(sysUser1);
         return null;
     }
 
     /**
      * 删除用户
      *
-     * @param user
+     * @param sysUser
      * @return
      */
     @Override
-    public Integer delete(User user) {
+    public Integer delete(SysUser sysUser) {
         return null;
     }
 
     /**
      * 修改用户信息
      *
-     * @param user
+     * @param sysUser
      * @return
      */
     @Override
-    public Integer edit(User user) {
+    public Integer edit(SysUser sysUser) {
         return null;
     }
 
     /**
      * 修改权限
      *
-     * @param user
-     * @param role
+     * @param sysUser
+     * @param sysRole
      * @return
      */
     @Override
-    public Integer editRole(User user, Role role) {
+    public Integer editRole(SysUser sysUser, SysRole sysRole) {
         return null;
     }
 
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
      * 查询所有用户
      * @return
      */
-    public List<User> find(){
+    public List<SysUser> find(){
         return userRepository.findAll();
     }
 }

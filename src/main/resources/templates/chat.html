@@ -7,7 +7,7 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,sysUser-scalable=no" />
     <style>
         .friend{
             border: none;
@@ -37,12 +37,12 @@
             padding: 5px 10px;
         }
 
-        .user-nickname{
+        .sysUser-nickname{
             margin-bottom: 2px;
             display: inline-block;
         }
 
-        .user-time{
+        .sysUser-time{
             margin-bottom: 2px;
             display: inline-block;
             color: #ADADAD;
@@ -82,10 +82,10 @@
             <div class="panel panel-danger" >
                 <div class="panel-heading">
                     <div style="display: inline-block; float: left">
-                        <img th:src="${user.avatar}" alt="" class="img-circle img-responsive" height="64px" width="64px" style="margin: 0 10px;">
+                        <img th:src="${sysUser.avatar}" alt="" class="img-circle img-responsive" height="64px" width="64px" style="margin: 0 10px;">
                     </div>
                     <div style="display:inline-block; width: 200px; height: 64px;">
-                        <p style="margin: 0; padding: 6px 0; font-size: 20px" th:text="${user.nickname}"></p>
+                        <p style="margin: 0; padding: 6px 0; font-size: 20px" th:text="${sysUser.nickname}"></p>
                         <p style="margin-bottom: 0; overflow: hidden; height: 16px">Online</p>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
             stompClient.subscribe('/topic/notice', function (message) {
                 showMessage(JSON.parse(message.body));
             });
-            stompClient.subscribe('/user/topic/chat', function (message) {
+            stompClient.subscribe('/sysUser/topic/chat', function (message) {
                 showMessage(JSON.parse(message.body));
             });
         });
@@ -160,7 +160,7 @@
                                    "<img class='media-object f-image img-circle' style='position: absolute' src=" + message.avatar + ">"+
                                    "</div>"+
                                    " <div style='margin-left: 55px'>"+
-                                   "<p class='user-nickname'>" + message.nickname + "</p> <p class='user-time'>"+message.sendTime+"</p><br>"+
+                                   "<p class='sysUser-nickname'>" + message.nickname + "</p> <p class='sysUser-time'>"+message.sendTime+"</p><br>"+
                                    "<div class='message-box-left'>" + message.content + "</div></div></div><br>"
         );
     }

@@ -13,23 +13,17 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String resourceString;// url
+    private String url;// 授权链接url
 
-    private String resourceId;// 资源ID
+    private Long pid;// 父节点id
 
-    private String remark;// 备注
+    private String descritpion;// 权限描述
 
-    private String resourceName;// 资源名称
+    private String name;// 权限名称
 
-    private String methodName;// 资源所对应的方法名
 
-    private String methodPath;// 资源所对应的包路径
-
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-    private List<Role> roles;
-
-    public Resource() {
-    }
+    @ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
+    private List<SysRole> sysRoles;
 
     public Long getId() {
         return id;
@@ -39,51 +33,43 @@ public class Resource {
         this.id = id;
     }
 
-    public String getResourceString() {
-        return resourceString;
+    public String getUrl() {
+        return url;
     }
 
-    public void setResourceString(String resourceString) {
-        this.resourceString = resourceString;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getResourceId() {
-        return resourceId;
+    public Long getPid() {
+        return pid;
     }
 
-    public void setResourceId(String resourceId) {
-        this.resourceId = resourceId;
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getDescritpion() {
+        return descritpion;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setDescritpion(String descritpion) {
+        this.descritpion = descritpion;
     }
 
-    public String getResourceName() {
-        return resourceName;
+    public String getName() {
+        return name;
     }
 
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMethodName() {
-        return methodName;
+    public List<SysRole> getSysRoles() {
+        return sysRoles;
     }
 
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getMethodPath() {
-        return methodPath;
-    }
-
-    public void setMethodPath(String methodPath) {
-        this.methodPath = methodPath;
+    public void setSysRoles(List<SysRole> sysRoles) {
+        this.sysRoles = sysRoles;
     }
 }

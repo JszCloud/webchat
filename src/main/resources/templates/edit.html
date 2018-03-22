@@ -21,7 +21,7 @@
 <div class="container">
     <div class="starter-template">
         <h2>用户注册</h2>
-        <form class="form-signin" sysRole="form" name="form"  action="/register" method="post" th:action="@{/do_register}">
+        <form class="form-signin" sysRole="form" name="form"  th:action="/edit" method="post">
             <div class="form-group">
 
                 <input type="text" class="form-control" name="nickname" value="" placeholder="昵称"/>
@@ -34,7 +34,10 @@
 
                 <input type="password" class="form-control" name="password" placeholder="密码"/>
             </div>
+            <div class="form-group">
 
+                <input type="password" class="form-control" name="rpassword" placeholder="重复密码"/>
+            </div>
             <input type="submit" id="login" value="Login" class="btn btn-primary"/>
         </form>
     </div>

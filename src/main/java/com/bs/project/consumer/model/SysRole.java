@@ -1,13 +1,14 @@
 package com.bs.project.consumer.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Nominal on 2018/3/19 0019.
  * 微博：@Mr丶Li_Anonym
  */
 @Entity
-public class Role {
+public class SysRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +17,10 @@ public class Role {
     @Column(unique = true)
     private String name;
 
-    public Role() {
+
+
+    public SysRole(Long id) {
+        this.id=id;
     }
 
     public Long getId() {
@@ -35,13 +39,16 @@ public class Role {
         this.name = name;
     }
 
-    public Role(String name) {
+    public SysRole(String name) {
         this.name = name;
+    }
+
+    public SysRole() {
     }
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "SysRole{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

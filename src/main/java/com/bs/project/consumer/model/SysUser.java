@@ -3,7 +3,6 @@ package com.bs.project.consumer.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
  * 微博：@Mr丶Li_Anonym
  */
 @Entity
-public class User implements UserDetails {
+public class SysUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,8 +38,8 @@ public class User implements UserDetails {
     private Date joinTime;
 
     //角色
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-    private List<Role> roles;
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    private List<SysRole> sysRoles;
 
     /**
      *
@@ -49,9 +48,9 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths =new ArrayList<GrantedAuthority>();
-        List<Role> roles=this.getRoles();
-        for (Role role:roles){
-            auths.add(new SimpleGrantedAuthority(role.getName()));
+        List<SysRole> sysRoles =this.getSysRoles();
+        for (SysRole sysRole : sysRoles){
+            auths.add(new SimpleGrantedAuthority(sysRole.getName()));
         }
         return auths;
     }
@@ -95,15 +94,21 @@ public class User implements UserDetails {
         return true;
     }
 
-    public User() {
+    public SysUser(String username, String password, List<SysRole> sysRoles) {
+        this.username = username;
+        this.password = password;
+        this.sysRoles = sysRoles;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public SysUser() {
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public List<SysRole> getSysRoles() {
+        return sysRoles;
+    }
+
+    public void setSysRoles(List<SysRole> sysRoles) {
+        this.sysRoles = sysRoles;
     }
 
     public Long getId() {
@@ -159,14 +164,14 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "SysUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", joinTime=" + joinTime +
-                ", roles=" + roles +
+                ", sysRoles=" + sysRoles +
                 '}';
     }
 }

@@ -3,13 +3,12 @@ package com.bs.project.web.control;
 import com.alibaba.fastjson.JSON;
 import com.bs.project.chat.model.ChatMessage;
 import com.bs.project.chat.model.Message;
-import com.bs.project.consumer.model.User;
+import com.bs.project.consumer.model.SysUser;
 import com.bs.project.consumer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -55,9 +54,9 @@ public class ChatRomController {
     private ChatMessage createMessage(String username, String message) {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setUsername(username);
-        User user = userService.findAll(username);
-        chatMessage.setAvatar(user.getAvatar());
-        chatMessage.setNickname(user.getNickname());
+        SysUser sysUser = userService.findAll(username);
+        chatMessage.setAvatar(sysUser.getAvatar());
+        chatMessage.setNickname(sysUser.getNickname());
         chatMessage.setContent(message);
         chatMessage.setSendTime(simpleDateFormat.format(new Date()));
         return chatMessage;

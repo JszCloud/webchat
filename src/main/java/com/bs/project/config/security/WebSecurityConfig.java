@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -39,17 +40,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(new String[]{"/js/**","/css/**","/img/**","/images/**","/fonts/**","/**/favicon.ico","/webjars/**","/to_register","/do_register"}).permitAll()//不拦截静态资源
                 .anyRequest().authenticated()//所有的请求需要认证即登陆后才能访问
                 .and()
                     .formLogin()
                         .loginPage("/login")
                         .failureUrl("/login?error")
-                .defaultSuccessUrl("/chat", true)//登录成功后跳转地址
+                .defaultSuccessUrl("/index", true)//登录成功后跳转地址
                 .permitAll()
                 .and()
                     .logout().permitAll()
                 .and()
                     .csrf().disable();
+    }
+
+    /**
+     * 设置不拦截的地址和静态资源
+     * @param web
+     */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(new String[]{"/js/**","/css/**","/img/**","/images/**","/fonts/**","/**/favicon.ico","/webjars/**","/to_register","/do_register","/admin"});
     }
 }
