@@ -1,17 +1,17 @@
 package com.bs.project.consumer.service.impl;
 
+import com.bs.project.consumer.dao.UserDao;
 import com.bs.project.consumer.dao.UserRepository;
 import com.bs.project.consumer.model.SysRole;
 import com.bs.project.consumer.model.SysUser;
 import com.bs.project.consumer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import javax.transaction.Transactional;
+import java.util.*;
 
 /**
  * Created by Nominal on 2018/3/20 0020.
@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService {
 
     BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
 
+    @Autowired
+    UserDao userDao;
 
     /**
      * 根据用户名查询用户
@@ -52,12 +54,10 @@ public class UserServiceImpl implements UserService {
         sysUser.setAvatar("/images/avatar/avatar" + new Random().nextInt(10) + ".jpg");
         //注册时间
         sysUser.setJoinTime(new Date());
-        List<SysRole> sysRoles =new ArrayList<>();
-
-        sysRoles.add(new SysRole(2L));
-        sysUser.setSysRoles(sysRoles);
+        sysUser.setSysRoles(Arrays.asList(new SysRole(1L)));
+        System.out.println("添加用户信息"+sysUser);
         SysUser sysUser1 =userRepository.save(sysUser);
-        System.out.println(sysUser1);
+
         return null;
     }
 
@@ -68,8 +68,11 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Transactional
     public Integer delete(SysUser sysUser) {
-        return null;
+        //userRepository.deleteById(sysUser.getId());
+
+        return userRepository.deleteSysUserById(sysUser.getId());
     }
 
     /**
@@ -79,7 +82,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Integer edit(SysUser sysUser) {
+    public Integer edit(SysUser sysUser){
+        //userDao.updateNameById(sysUser.getId(),sysUser.getUsername(),sysUser.getNickname(),sysUser.getPassword());
         return null;
     }
 
@@ -101,5 +105,11 @@ public class UserServiceImpl implements UserService {
      */
     public List<SysUser> find(){
         return userRepository.findAll();
+    }
+
+    @Override
+    public SysUser findById(Long id) {
+
+        return userRepository.findByIdEquals(id);
     }
 }

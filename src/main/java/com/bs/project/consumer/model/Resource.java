@@ -22,7 +22,7 @@ public class Resource {
     private String name;// 权限名称
 
 
-    @ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     private List<SysRole> sysRoles;
 
     public Long getId() {

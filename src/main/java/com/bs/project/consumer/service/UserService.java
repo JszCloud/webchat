@@ -50,4 +50,6 @@ public interface UserService {
 
     List<SysUser> find();
 
+    SysUser findById(Long id);
+
 }

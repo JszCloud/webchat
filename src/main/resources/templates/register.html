@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,sysUser-scalable=no"/>
     <title>注册</title>
     <link rel="stylesheet" th:href="@{css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{css/signin.css}"/>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
         body {
             padding-top: 20px;
@@ -19,7 +22,9 @@
 <body>
 <div th:insert="~{header :: nav}"></div>
 <div class="container">
-    <div class="starter-template">
+    <div class="row">
+        <div class="col-xs-1 col-md-3"></div>
+    <div class="col-xs-10 col-md-6 starter-template">
         <h2>用户注册</h2>
         <form class="form-signin" sysRole="form" name="form"  action="/register" method="post" th:action="@{/do_register}">
             <div class="form-group">
@@ -35,8 +40,9 @@
                 <input type="password" class="form-control" name="password" placeholder="密码"/>
             </div>
 
-            <input type="submit" id="login" value="Login" class="btn btn-primary"/>
+            <input type="submit" id="login" value="注册" class="btn btn-primary"/>
         </form>
+    </div>
     </div>
 </div>
 

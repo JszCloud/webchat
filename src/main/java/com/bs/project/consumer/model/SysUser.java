@@ -38,8 +38,9 @@ public class SysUser implements UserDetails {
     private Date joinTime;
 
     //角色
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     private List<SysRole> sysRoles;
+
 
     /**
      *
@@ -103,6 +104,10 @@ public class SysUser implements UserDetails {
     public SysUser() {
     }
 
+    public SysUser(Long id) {
+        this.id=id;
+    }
+
     public List<SysRole> getSysRoles() {
         return sysRoles;
     }
@@ -161,6 +166,11 @@ public class SysUser implements UserDetails {
         this.joinTime = joinTime;
     }
 
+    public SysUser(String username, String password, String nickname) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+    }
 
     @Override
     public String toString() {

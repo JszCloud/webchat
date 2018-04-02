@@ -1,9 +1,19 @@
 package com.bs.project.chat.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * 消息显示
  */
+
+@Entity
 public class ChatMessage {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private String username;
 
@@ -55,5 +65,16 @@ public class ChatMessage {
 
   public void setSendTime(String sendTime) {
     this.sendTime = sendTime;
+  }
+
+  @Override
+  public String toString() {
+    return "ChatMessage{" +
+            "username='" + username + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", avatar='" + avatar + '\'' +
+            ", content='" + content + '\'' +
+            ", sendTime='" + sendTime + '\'' +
+            '}';
   }
 }

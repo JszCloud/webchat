@@ -25,6 +25,11 @@ public class LoginController {
         return "index";
     }
 
+    @GetMapping("head")
+    public String head(){
+        return "head";
+    }
+
 
     @RequestMapping("/chat")
     public String index(Principal principal,Model model){

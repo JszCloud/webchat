@@ -17,9 +17,9 @@ import java.util.UUID;
  * 文件上传控制器
  */
 @Controller
-public class FileController {
+public class FileController1 {
 
-    //跳转到上传文件的页面
+    /*//跳转到上传文件的页面
     @RequestMapping(value="/upload")
     public String goUploadImg() {
         //跳转到 templates 目录下的 uploadimg.html
@@ -27,7 +27,7 @@ public class FileController {
     }
 
     //处理文件上传
-    @RequestMapping(value="/uploadfile", method = RequestMethod.POST)
+    @RequestMapping(value="/js", method = RequestMethod.POST)
     public @ResponseBody
     String uploadImg(@RequestParam("file") MultipartFile file,
                      HttpServletRequest request) {
@@ -57,5 +57,5 @@ public class FileController {
         }
         //返回json
         return "uploadimg success";
-    }
+    }*/
 }

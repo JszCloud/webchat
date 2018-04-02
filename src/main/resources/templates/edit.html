@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,sysUser-scalable=no"/>
     <title>注册</title>
-    <link rel="stylesheet" th:href="@{css/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{css/signin.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/signin.css}"/>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
         body {
             padding-top: 20px;
@@ -20,25 +23,29 @@
 <div th:insert="~{header :: nav}"></div>
 <div class="container">
     <div class="starter-template">
-        <h2>用户注册</h2>
-        <form class="form-signin" sysRole="form" name="form"  th:action="/edit" method="post">
+        <h2>用户信息修改</h2>
+        <form class="form-signin" sysRole="form" name="form"  th:action="@{/admin/do_edit}" method="post">
             <div class="form-group">
 
-                <input type="text" class="form-control" name="nickname" value="" placeholder="昵称"/>
+                <input type="text" class="form-control" name="nickname" th:value="${sysUser.nickname}"  placeholder="昵称"/>
             </div>
             <div class="form-group">
 
-                <input type="text" class="form-control" name="username" value="" placeholder="账号"/>
+                <input type="text" class="form-control" name="username" th:value="${sysUser.username}" placeholder="账号"/>
             </div>
             <div class="form-group">
 
-                <input type="password" class="form-control" name="password" placeholder="密码"/>
+                <input type="password" class="form-control" name="password" th:value="${sysUser.password}" placeholder="密码"/>
             </div>
             <div class="form-group">
+                <select class="form-control" name="name">
+                    <option value="ROLE_ADMIN" th:selected="${sysRole.name} eq 'ROLE_ADMIN'">管理员</option>
+                    <option value="ROLE_USER" th:selected="${sysRole.name} eq 'ROLE_USER'">普通用户</option>
+                </select>
 
-                <input type="password" class="form-control" name="rpassword" placeholder="重复密码"/>
             </div>
-            <input type="submit" id="login" value="Login" class="btn btn-primary"/>
+
+            <input type="submit" id="login" value="保存" class="btn btn-primary"/>
         </form>
     </div>
 </div>

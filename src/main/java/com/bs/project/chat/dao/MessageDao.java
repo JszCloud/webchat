@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 微博：@Mr丶Li_Anonym
  */
 public interface MessageDao extends JpaRepository<Message,Long> {
-
+    Message findAllByIdEquals(Long id);
 }

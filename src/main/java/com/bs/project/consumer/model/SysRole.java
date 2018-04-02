@@ -19,7 +19,8 @@ public class SysRole {
 
 
 
-    public SysRole(Long id) {
+    public SysRole(Long id,String name) {
+        this.name = name;
         this.id=id;
     }
 
@@ -41,6 +42,9 @@ public class SysRole {
 
     public SysRole(String name) {
         this.name = name;
+    }
+    public SysRole(Long id) {
+        this.id = id;
     }
 
     public SysRole() {

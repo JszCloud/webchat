@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -35,13 +36,23 @@ public class AdminController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
-
-        return "";
+        SysUser sysUser=new SysUser(id);
+        userService.delete(sysUser);
+        return "redirect:/admin/";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id,Model model){
-
+        SysUser sysUser=userService.findById(id);
+        System.out.println(sysUser.getSysRoles().get(0));
+        model.addAttribute("sysRole",sysUser.getSysRoles().get(0));
+        model.addAttribute("sysUser",sysUser);
         return "edit";
+    }
+
+    @PostMapping("/do_edit")
+    public String do_edit(SysUser sysUser){
+        userService.edit(sysUser);
+        return "redirect:/admin/";
     }
 }
